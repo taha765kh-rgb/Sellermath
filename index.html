@@ -1,0 +1,155 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="description" content="Free ecommerce profit, pricing, advertising and ROAS calculators for online sellers.">
+<title>SellerMath - Free Seller Profit Calculators</title>
+<style>
+*{box-sizing:border-box}
+body{margin:0;font-family:Arial,sans-serif;background:#f5f7fb;color:#182235}
+header{background:#101d35;color:white;padding:20px 7%;display:flex;justify-content:space-between;align-items:center}
+.logo{font-size:25px;font-weight:bold;color:#65e6b1}
+nav a{color:white;text-decoration:none;margin-left:18px;font-size:14px}
+.hero{text-align:center;padding:65px 20px 45px;background:#101d35;color:white}
+.hero h1{font-size:clamp(32px,5vw,48px);margin:0 0 15px}
+.hero p{color:#c5d1e2;font-size:17px;line-height:1.6}
+.hero span{color:#65e6b1}
+.container{max-width:1050px;margin:35px auto;padding:0 18px}
+.tools{display:grid;grid-template-columns:repeat(auto-fit,minmax(270px,1fr));gap:18px}
+.card{background:white;border:1px solid #e4e9f1;border-radius:14px;padding:22px;box-shadow:0 5px 20px #17243a0a}
+.card h2{font-size:20px;margin:0 0 8px}
+.card p{color:#64748b;font-size:14px;line-height:1.5}
+label{display:block;font-size:13px;font-weight:bold;margin:13px 0 6px}
+input{width:100%;padding:12px;border:1px solid #d7deea;border-radius:8px;font-size:15px}
+button{background:#087f5b;color:white;border:0;border-radius:8px;padding:12px 17px;margin-top:15px;font-size:14px;font-weight:bold;cursor:pointer;width:100%}
+button:hover{background:#066747}
+.result{background:#e9f8f1;padding:13px;border-radius:8px;margin-top:14px;font-weight:bold;color:#075b40;line-height:1.6;min-height:45px}
+section h2.section-title{text-align:center;font-size:27px;margin-bottom:8px}
+.subtitle{text-align:center;color:#64748b;margin-bottom:25px}
+footer{text-align:center;padding:30px 15px;background:#101d35;color:#d4dbea;margin-top:45px;font-size:14px}
+footer a{color:#65e6b1;margin:0 8px}
+.note{font-size:12px;color:#64748b;margin-top:12px}
+</style>
+</head>
+<body>
+<header>
+ <div class="logo">SellerMath</div>
+ <nav><a href="#tools">Calculators</a><a href="#about">About</a></nav>
+</header>
+
+<div class="hero">
+ <h1>Know Your Numbers.<br><span>Keep More Profit.</span></h1>
+ <p>Free calculators for ecommerce sellers, dropshippers and online businesses.<br>Calculate your profit before you spend your money.</p>
+</div>
+
+<main class="container" id="tools">
+ <h2 class="section-title">Free Business Calculators</h2>
+ <p class="subtitle">Simple tools to make smarter business decisions.</p>
+
+ <div class="tools">
+
+ <div class="card">
+ <h2>💰 Profit Calculator</h2>
+ <p>Find out how much money you actually earn from each sale.</p>
+ <label>Selling price (PKR)</label><input id="selling" type="number" min="0" value="3000">
+ <label>Product cost (PKR)</label><input id="cost" type="number" min="0" value="1200">
+ <label>Advertising cost (PKR)</label><input id="ads" type="number" min="0" value="500">
+ <label>Delivery and other costs (PKR)</label><input id="delivery" type="number" min="0" value="250">
+ <button onclick="profit()">Calculate Profit</button>
+ <div class="result" id="profitResult" aria-live="polite">Your result will appear here.</div>
+ </div>
+
+ <div class="card">
+ <h2>🏷️ Product Pricing Calculator</h2>
+ <p>Calculate the selling price needed for your target profit margin.</p>
+ <label>Product cost (PKR)</label><input id="pcost" type="number" min="0" value="1000">
+ <label>Other costs (PKR)</label><input id="other" type="number" min="0" value="300">
+ <label>Desired profit margin (%)</label><input id="margin" type="number" min="0" max="99.9" value="30">
+ <button onclick="pricing()">Calculate Selling Price</button>
+ <div class="result" id="priceResult" aria-live="polite">Your result will appear here.</div>
+ </div>
+
+ <div class="card">
+ <h2>📈 Break-even ROAS Calculator</h2>
+ <p>Find the advertising return needed to cover your costs.</p>
+ <label>Selling price (PKR)</label><input id="roasPrice" type="number" min="0" value="3000">
+ <label>Product and non-ad costs (PKR)</label><input id="roasCost" type="number" min="0" value="1500">
+ <button onclick="roas()">Calculate Break-even ROAS</button>
+ <div class="result" id="roasResult" aria-live="polite">Your result will appear here.</div>
+ </div>
+
+ <div class="card">
+ <h2>📣 Advertising Profit Calculator</h2>
+ <p>Estimate campaign revenue and profit after advertising spend.</p>
+ <label>Revenue from ads (PKR)</label><input id="revenue" type="number" min="0" value="30000">
+ <label>Advertising spend (PKR)</label><input id="spend" type="number" min="0" value="5000">
+ <label>Product and other costs (PKR)</label><input id="campaignCost" type="number" min="0" value="12000">
+ <button onclick="campaign()">Calculate Campaign Profit</button>
+ <div class="result" id="campaignResult" aria-live="polite">Your result will appear here.</div>
+ </div>
+
+ <div class="card">
+ <h2>🧾 Marketplace Fee Calculator</h2>
+ <p>Estimate how much remains after marketplace fees and costs.</p>
+ <label>Selling price (PKR)</label><input id="marketPrice" type="number" min="0" value="3000">
+ <label>Marketplace fee (%)</label><input id="fee" type="number" min="0" max="100" value="10">
+ <label>Product cost (PKR)</label><input id="marketCost" type="number" min="0" value="1200">
+ <label>Other costs (PKR)</label><input id="marketOther" type="number" min="0" value="250">
+ <button onclick="market()">Calculate Net Amount</button>
+ <div class="result" id="marketResult" aria-live="polite">Your result will appear here.</div>
+ </div>
+
+ </div>
+ <p class="note">All calculations are estimates based on the numbers you enter. Actual taxes, fees, returns and other costs may vary.</p>
+</main>
+
+<section class="container" id="about">
+ <div class="card">
+ <h2>About SellerMath</h2>
+ <p>SellerMath provides simple, free business calculators to help online sellers understand their product costs, advertising performance, pricing and profits. Our goal is to make business calculations easier for everyone.</p>
+ </div>
+</section>
+
+<footer>
+ <strong>SellerMath</strong>
+ <p>Free tools for smarter online selling.</p>
+ <p>© 2026 SellerMath. All rights reserved.</p>
+ <p><a href="mailto:contact@example.com">Contact</a> | <a href="privacy.html">Privacy</a> | <a href="terms.html">Terms</a></p>
+</footer>
+
+<script>
+function num(id){return Math.max(0,Number(document.getElementById(id).value)||0)}
+function money(n){return "PKR "+n.toLocaleString("en-PK",{maximumFractionDigits:2})}
+function show(id,text){document.getElementById(id).textContent=text}
+
+function profit(){
+ const p=num("selling"),c=num("cost"),a=num("ads"),d=num("delivery");
+ const result=p-c-a-d;
+ show("profitResult","Net profit: "+money(result)+" | Margin: "+(p?((result/p)*100).toFixed(2):"0")+"%");
+}
+function pricing(){
+ const c=num("pcost")+num("other"),m=num("margin");
+ if(m>=100){show("priceResult","Enter a margin below 100%.");return}
+ const p=c/(1-m/100);
+ show("priceResult","Suggested selling price: "+money(p));
+}
+function roas(){
+ const p=num("roasPrice"),c=num("roasCost");
+ if(p<=c){show("roasResult","No positive amount remains to cover advertising.");return}
+ show("roasResult","Break-even ROAS: "+(p/(p-c)).toFixed(2)+"x");
+}
+function campaign(){
+ const r=num("revenue"),s=num("spend"),c=num("campaignCost");
+ show("campaignResult","Estimated profit: "+money(r-s-c)+" | ROAS: "+(s?r/s:0).toFixed(2)+"x");
+}
+function market(){
+ const p=num("marketPrice"),f=num("fee"),c=num("marketCost"),o=num("marketOther");
+ if(f>100){show("marketResult","Fee cannot exceed 100%.");return}
+ const fees=p*f/100;
+ show("marketResult","Estimated remaining amount: "+money(p-fees-c-o)+" | Fee: "+money(fees));
+}
+</script>
+</body>
+</html>
